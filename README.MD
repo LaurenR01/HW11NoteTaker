@@ -7,7 +7,8 @@ This is just a simple app that allows you to record notes and pull them back up 
 
 Deployed Application
 
-https://laurenr01.github.io/HW11NoteTaker/
+GitHub https://laurenr01.github.io/HW11NoteTaker/
+Heroku https://infinite-springs-42583.herokuapp.com/
 
 Technology
 
