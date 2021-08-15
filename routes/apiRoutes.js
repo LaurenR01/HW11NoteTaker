@@ -1,33 +1,34 @@
 const fs = require('fs');
 const uuid = require('uuid')
 module.exports = (app) => {
-    let datatable = require('../db/db.json');
+    const data = fs.readFfileSync('/db/db.json', 'utf-8');
+    const savedNotes = json.parse(data);
+
 
     app.get('/api/notes', (req, res)=> {
-    let savedNotes = JSON.parse(fs.readFileSync('./db/db.json', utf8));
-    res.json(savedNotes)
+    res.set('Content-Type', 'application/json');
+    res.sendFile(path.join(__dirname, '/db/db.json'))
     });
 
     app.post('/api/notes', (req, res) =>{
         let info = req.body
-        info.id = uuid.v1()
-        let savedNotes = JSON.parse( fs.readFileSync('./db/db.json', utf8));
+        let newID = uuid.v1()
+        info.id = newID
         savedNotes.push(info);
-        fs.writeFileSync('./db/db.json', JSON.stringify(savedNotes));
-        res.JSON(savedNotes);
+
+        savedNote(savedNotes);
+        res.sendFile(info);
     });
 
-    app.delete('/api/notes/:id', (req, res) => { let info = req.params.id;
-        console.log(info);
-        let savedNotes = JSON.parse (fs.readFileSync('./db/db.json', utf8));
+    app.delete('/api/notes/:id', (req, res) => { 
+        let info = req.params.id;
         for (let i=0; i < savedNotes.length, i++;) {
             if(savedNotes[i].id === info){
                 savedNotes.splice(i, 1);
-                fs.writeFileSync('./db/db.json', JSON.stringify(savedNotes));
-                res.JSON(savedNotes);
-                return;
+                
             }
         }
-
+            saveNote(savedNotes);
+            res.end();
     })
 }
