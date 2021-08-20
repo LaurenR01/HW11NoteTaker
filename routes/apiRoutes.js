@@ -1,8 +1,8 @@
 const fs = require('fs');
 const uuid = require('uuid')
 module.exports = (app) => {
-    const data = fs.readFfileSync('/db/db.json', 'utf-8');
-    const savedNotes = json.parse(data);
+    const data = fs.readFileSync('../db/db.json', 'utf-8');
+    const savedNotes = JSON.parse(data);
 
 
     app.get('/api/notes', (req, res)=> {
