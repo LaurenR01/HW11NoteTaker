@@ -12,7 +12,7 @@ Heroku https://infinite-springs-42583.herokuapp.com/
 
 Technology
 
-It uses Node.js and Express to store the notes on the server and recall them for the nest time you use the app.  It allows you to save and delete.
+It uses Node.js and Express to store the notes on the server and recall them for the next time you use the app.  It allows you to save and delete.
 
 Preview
 

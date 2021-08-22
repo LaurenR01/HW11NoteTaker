@@ -13,6 +13,17 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static("public"));
 
+// To save a note
+
+let saveNote = (notes) => {
+  fs.writeFile(
+    path.join(__dirname, './db/db.json'),
+    JSON.stringify(notes),
+    (err) => (err ? console.log(err) : console.log("Note Saved!"))
+  );
+};
+
+
 // HTML Routes
 
 app.get('/', (req, res) =>{
@@ -46,12 +57,12 @@ app.post('/api/notes', (req, res) =>{
     savedNotes.push(info);
 
     saveNote(savedNotes);
-    res.sendFile(info);
+    res.send(info);
 });
 
-app.delete('/api/notes/:id', (req, res) => { 
-    let info = req.params.id;
-    for (let i=0; i < savedNotes.length, i++;) {
+app.delete('/api/notes/:uuid', (req, res) => { 
+    let info = req.params.uuid;
+    for (let i=0; i < savedNotes.length; i++) {
         if(savedNotes[i].id === info){
             savedNotes.splice(i, 1);
             
@@ -60,18 +71,6 @@ app.delete('/api/notes/:id', (req, res) => {
         saveNote(savedNotes);
         res.end();
 })
-
-// To save a note
-
-const saveNote = (notes) => {
-  fs.writeFile(
-    path.join(__dirname, './db/db.json'),
-    JSON.stringify(notes),
-    console.log("Note Saved!")
-  )
-};
-
-
 
 app.listen(PORT, () => {
     console.log(`App listening on PORT: ${PORT}`);
